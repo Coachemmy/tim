@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { new30, new31, reach14, reach17 } from "../assets";
+import { ictvvid, new30, new31, reach17 } from "../assets";
 
 const ICTPage = () => {
   return (
@@ -28,16 +28,16 @@ const ICTPage = () => {
           and Communication Technology (ICT) skills is crucial for personal and
           professional success.
         </p>
-        <div className="flex justify-center mb-12 mt-8">
+        {/* <div className="flex justify-center mb-12 mt-8">
           <img
             src={reach14}
             alt="ICT Skills for Girls"
             className="w-[350px] md:w-[500px] h-fit object-contain border-2 border-[#65a7b2] rounded-lg"
           />
-        </div>
+        </div> */}
 
         <div className="flex justify-center mb-12 mt-4">
-        {/* <div className="w-full max-w-3xl">
+        <div className="w-full max-w-3xl">
           <video
             controls
             poster={new31}
@@ -46,7 +46,7 @@ const ICTPage = () => {
             <source src={ictvvid} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        </div> */}
+        </div>
       </div>
       </div>
 
