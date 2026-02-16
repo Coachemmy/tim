@@ -65,7 +65,7 @@ import reach20 from "../assets/reach20.jpg";
 import reach21 from "../assets/reach21.jpg";
 import reach22 from "../assets/reach22.jpg";
 import reach23 from "../assets/reach23.jpg";
-import ictvvid from "../assets/ictvvid.mp4";
+// import ictvvid from "../assets/ictvvid.mp4";
 
 export {
   board1,
@@ -76,7 +76,7 @@ export {
   icon2,
   icon3,
   team,
-  ictvvid,
+  // ictvvid,
   face1,
   face2,
   face3,
