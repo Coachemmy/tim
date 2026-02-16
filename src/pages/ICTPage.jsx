@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import reach14 from "../assets/reach14.jpg";
 import { ictvvid, new30, new31, reach17 } from "../assets";
 
 const ICTPage = () => {
