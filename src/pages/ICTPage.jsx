@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import reach14 from "../assets/reach14.jpg";
-import { new30, new31, reach17 } from "../assets";
+import { ictvvid, new30, new31, reach17 } from "../assets";
 
 const ICTPage = () => {
   return (
@@ -29,14 +29,29 @@ const ICTPage = () => {
           and Communication Technology (ICT) skills is crucial for personal and
           professional success.
         </p>
-        <div className="flex justify-center mb-12 mt-8">
+        {/* <div className="flex justify-center mb-12 mt-8">
           <img
             src={reach14}
             alt="ICT Skills for Girls"
             className="w-[350px] md:w-[500px] h-fit object-contain border-2 border-[#65a7b2] rounded-lg"
           />
+        </div> */}
+
+        <div className="flex justify-center mb-12 mt-4">
+        <div className="w-full max-w-3xl">
+          <video
+            controls
+            poster={new31}
+            className="w-full rounded-xl shadow-lg"
+          >
+            <source src={ictvvid} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
+      </div>
+
+      
 
       <div className="max-w-5xl mx-auto space-y-12 text-gray-700">
         <section>
@@ -129,7 +144,7 @@ const ICTPage = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center p-5 bg-white border border-[#65a7b2]/20 rounded-xl">
-              <div className="text-3xl font-bold text-[#292496]">200+</div>
+              <div className="text-3xl font-bold text-[#292496]">500+</div>
               <div className="text-gray-600">Girls Trained (ICT)</div>
             </div>
             <div className="text-center p-5 bg-white border border-[#65a7b2]/20 rounded-xl">

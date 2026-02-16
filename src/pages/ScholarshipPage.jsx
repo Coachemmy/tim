@@ -98,8 +98,7 @@ const ScholarshipPage = () => {
             <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
               <h3 className="font-bold text-yellow-800 mb-2">⚠️ Challenge</h3>
               <p>
-                Three girls from Chisambe CDSS are underperforming due to a lack
-                of essential learning materials.
+                Some girls are underperforming due to lack of essential learning materials.
               </p>
             </div>
           </div>
