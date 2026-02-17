@@ -37,7 +37,7 @@ const CTAHome = () => {
 
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed opacity-90">
             Improving the well-being of girls
-            through Education, Empowerment and Leadership and Health and not Empowering
+            through Education, Empowerment and Leadership, and Health
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
