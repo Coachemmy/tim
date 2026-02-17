@@ -19,6 +19,7 @@ import {
   team8,
   team38,
   board4,
+  team9,
 } from "../assets";
 
 const necTeam = [
@@ -46,7 +47,7 @@ const operationsTeam = [
   { name: "", role: " Technical Leads", photo: icon1 },
   { name: "", role: "Programs Coordinator", photo: icon2 },
   { name: "", role: "Communications Officer", photo: icon3 },
-  { name: "", role: "Administrative Officer", photo: icon1 },
+  { name: " Harry Banda", role: "Administrative Officer", photo: team9 },
 ];
 
 const board = [

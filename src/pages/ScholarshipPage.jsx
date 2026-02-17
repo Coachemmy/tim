@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { face2, face3, new11, new12, reach3 } from "../assets";
+import { face4, new12, new15, } from "../assets";
 
 const ScholarshipPage = () => {
   return (
@@ -108,7 +108,7 @@ const ScholarshipPage = () => {
             Scholars in Focus
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            {[new11, reach3, face3, face2].map((img, idx) => (
+            {[ face4, new15].map((img, idx) => (
               <div
                 key={idx}
                 className="rounded-xl overflow-hidden border border-[#65a7b2]/20 shadow-sm"
