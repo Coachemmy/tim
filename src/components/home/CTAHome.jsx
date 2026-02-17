@@ -36,8 +36,8 @@ const CTAHome = () => {
           </h1>
 
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed opacity-90">
-            Empowering girls in Malawi through education, health, and
-            opportunity.
+            Improving the well-being of girls
+            through Education, Empowerment and Leadership and Health and not Empowering
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -51,9 +51,9 @@ const CTAHome = () => {
 
           <div onClick={scrollToContent} className="mt-28 cursor-pointer group">
             <p className="font-extrabold text-sm opacity-70 group-hover:opacity-100 transition-opacity">
-              Discover our impact 
+              Discover our impact
             </p>
-            
+
             <div className="w-6 h-10 mx-auto border-2 border-white rounded-full flex justify-center mt-2 group-hover:border-[#FFBE0B] transition-colors">
               <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
             </div>
