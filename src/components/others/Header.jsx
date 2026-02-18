@@ -50,9 +50,9 @@ const Header = () => {
       </div>
 
       <div className="hidden md:flex items-center justify-center">
-        <div className="flex justify-center items-center gap-40 text-lg font-medium">
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/about-us">About</NavLink>
+        <div className="flex justify-center items-center gap-28 text-lg font-medium">
+          <NavLink to="/">HOME</NavLink>
+          <NavLink to="/about-us">ABOUT US</NavLink>
 
           <div
             className="relative"
@@ -60,7 +60,7 @@ const Header = () => {
             onMouseLeave={() => setIsSolutionsOpen(false)}
           >
             <div className="flex items-center gap-1 cursor-pointer">
-              <span>Projects</span>
+              <span>PROJECTS</span>
               <MdArrowDropDown
                 className={`transition-transform duration-300 ${
                   isSolutionsOpen ? "rotate-180" : ""
@@ -88,13 +88,13 @@ const Header = () => {
             </div>
           </div>
 
-          <NavLink to="/blog">Blog</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/blog">BLOG</NavLink>
+          <NavLink to="/contact">CONTACT US</NavLink>
           <Link
             to="/donate"
             className="bg-[#292496] text-white hover:bg-opacity-90 p-3 rounded-md block text-center font-medium transition-all duration-200"
           >
-            Donate
+            DONATE
           </Link>
         </div>
       </div>
@@ -121,13 +121,13 @@ const Header = () => {
 
             <div className="py-4">
               <MobileNavLink to="/" onClick={() => setIsMenuOpen(false)}>
-                Home
+                HOME
               </MobileNavLink>
               <MobileNavLink
                 to="/about-us"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About Us
+                ABOUT US
               </MobileNavLink>
 
               {/* Projects Dropdown - Mobile */}
@@ -138,7 +138,7 @@ const Header = () => {
                     setIsMobileSolutionsOpen(!isMobileSolutionsOpen)
                   }
                 >
-                  <span>Projects</span>
+                  <span>PROJECTS</span>
                   <MdArrowDropDown
                     className={`transition-transform duration-300 ${
                       isMobileSolutionsOpen ? "rotate-180" : ""
@@ -169,13 +169,13 @@ const Header = () => {
               </div>
 
               <MobileNavLink to="/blog" onClick={() => setIsMenuOpen(false)}>
-                Blog
+                BLOG
               </MobileNavLink>
               <MobileNavLink to="/contact" onClick={() => setIsMenuOpen(false)}>
-                Contact
+                CONTACT US
               </MobileNavLink>
               <MobileNavLink to="/donate" onClick={() => setIsMenuOpen(false)}>
-                Donate
+                DONATE
               </MobileNavLink>
             </div>
           </div>
