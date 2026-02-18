@@ -4,6 +4,7 @@ import Partners from "../components/about/Partners";
 import SuccessStory from "../components/home/SuccessStory";
 import MainHero from "../components/home/MainHero";
 import BFooterHome from "../components/home/BFooterHome";
+import Vac from "../components/home/Vac";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Hero />     
       <SuccessStory />
       <MainHero />
+      <Vac/>
       <BFooterHome />
       <Partners />
     </div>

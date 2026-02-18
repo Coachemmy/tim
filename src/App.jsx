@@ -25,6 +25,7 @@ import AOS from "aos";
 import "aos/dist/aos.css"; 
 import WhatsAppButton from "./components/WhatsAppButton";
 import BlogPost from "./pages/BlogPost";
+import Vacancies from "./pages/Vacancies";
 
 AOS.init({
   duration: 800,
@@ -63,6 +64,7 @@ const App = () => {
             <Route path="/projects/health" element={<HealthPage />} />
             <Route path="/projects/scholarship" element={<ScholarshipPage />} />
             <Route path="/projects/empowerment" element={<EmpowermentPage />} />
+            <Route path="/vacancies" element={<Vacancies />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
