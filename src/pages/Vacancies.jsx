@@ -3,18 +3,14 @@
 const roles = [
   {
     id: 1,
-    title: "Financial Record-Keeping Assistant",
-    description: "Maintain accurate and up-to-date financial records for all RoG transactions, including donations, expenses, and grants.",
-  },
-  {
-    id: 2,
-    title: "Volunteer Contributions & Donations Tracker",
-    description: "Monitor, categorize, and log incoming contributions from volunteers, partners, and individual donors to ensure transparency and accountability.",
-  },
-  {
-    id: 3,
-    title: "Financial Documentation & Admin Support",
-    description: "Assist with preparing financial reports, organizing receipts, filing documentation, and supporting audit readiness.",
+    title: "Finance & Financial Administration Assistant",
+    description: "Join our team to support all financial operations at Reach Out to Girls. This comprehensive role offers hands-on experience in nonprofit financial management.",
+    responsibilities: [
+      "Maintain accurate financial records for all RoG transactions including donations, expenses, and grants",
+      "Monitor and log incoming contributions from volunteers, partners, and individual donors",
+      "Prepare financial reports, organize receipts, and support documentation for audits",
+      "Ensure transparency and accountability across all financial activities"
+    ]
   }
 ];
 
@@ -31,7 +27,7 @@ const Vacancies = () => {
           </p>
         </div>
 
-        {/* Three Role Cards */}
+        {/* Single Role Card */}
         <div className="space-y-8">
           {roles.map((role) => (
             <div
@@ -44,7 +40,18 @@ const Vacancies = () => {
                   Remote · Voluntary
                 </span>
               </div>
-              <p className="text-white mb-6">{role.description}</p>
+              
+              <p className="text-white mb-4">{role.description}</p>
+              
+              {/* Responsibilities List */}
+              <div className="mb-6">
+                <h3 className="font-semibold text-white mb-2">Key Responsibilities:</h3>
+                <ul className="list-disc list-inside text-white space-y-1">
+                  {role.responsibilities.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
               
               <div className="bg-yellow-50 border-l-4 border-yellow-500 p-3 mb-6">
                 <p className="font-medium text-gray-800">
@@ -57,7 +64,7 @@ const Vacancies = () => {
                   href="https://forms.gle/NZgZifBovHfvJmtMA"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-[#292496] border hover:bg-gray-800 text-white px-6 py-3 rounded-xl font-semibold transition shadow-md"
+                  className="inline-block bg-[#292496] border border-white hover:bg-white hover:text-[#292496] text-white px-6 py-3 rounded-xl font-semibold transition shadow-md"
                 >
                   Apply Now 
                 </a>
