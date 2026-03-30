@@ -1,9 +1,0 @@
-{
-  "id": "unique-id",
-  "title": "Blog Post Title",
-  "date": "2024-06-15",
-  "image": "/blog-images/post1.jpg",
-  "tags": ["education", "malawi", "girls"],
-  "excerpt": "Short preview text...",
-  "content": "Full blog content in HTML or plain text..."
-}

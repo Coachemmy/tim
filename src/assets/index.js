@@ -31,8 +31,6 @@ import new30 from "../assets/new30.jpg";
 import new31 from "../assets/new31.jpg";
 import new32 from "../assets/new32.jpg";
 import icon1 from "../assets/icon1.png";
-import icon2 from "../assets/icon2.png";
-import icon3 from "../assets/icon3.png";
 import team from "../assets/team.jpg";
 import team1 from "../assets/team1.jpg";
 import team2 from "../assets/team2.jpg";
@@ -67,18 +65,14 @@ import reach20 from "../assets/reach20.jpg";
 import reach21 from "../assets/reach21.jpg";
 import reach22 from "../assets/reach22.jpg";
 import reach23 from "../assets/reach23.jpg";
-import ictvvid from "../assets/ictvvid.mp4";
 
 export {
   board1,
   board2,
   board3,
   board4,
-  icon1,
-  icon2,
-  icon3,
+  icon1, 
   team,
-  ictvvid,
   face1,
   face2,
   face3,

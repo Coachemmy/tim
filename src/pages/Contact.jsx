@@ -1,332 +1,290 @@
-/* eslint-disable react/no-unknown-property */
+import  { useState } from 'react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { MdOutlineEmail, MdOutlineCall, MdLocationOn } from "react-icons/md";
-import emailjs from "@emailjs/browser";
-import PropTypes from "prop-types";
-
-const Toast = ({ message, type, onClose }) => {
-  return (
-    <div
-      className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg text-white font-medium animate-fade-in ${
-        type === "success" ? "bg-green-500" : "bg-red-500"
-      }`}
-    >
-      {message}
-      <button onClick={onClose} className="ml-4 text-white hover:text-gray-200">
-        ✕
-      </button>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
-        }
-      `}</style>
-    </div>
-  );
-};
-
-Toast.propTypes = {
-  message: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["success", "error"]).isRequired,
-  onClose: PropTypes.func.isRequired,
-};
-
-const ContactPage = () => {
+const Contact = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
   });
-  const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-    type: "success",
-  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    const serviceID = "service_2ixxrva";
-    const templateID = "template_ak36qoj";
-    const publicKey = "kv0oL9-nCt-1arW55";
-
-    emailjs
-      .send(serviceID, templateID, formData, publicKey)
-      .then((result) => {
-        console.log("SUCCESS!", result.text);
-        setToast({
-          show: true,
-          message: "Message sent successfully! We’ll reply within 24 hours.",
-          type: "success",
-        });
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      })
-      .catch((error) => {
-        console.log("FAILED...", error.text);
-        setToast({
-          show: true,
-          message:
-            "Oops! Failed to send. Please try again or email us directly.",
-          type: "error",
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    const newErrors = validateForm();
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    
+    // Simulate form submission
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setErrors({});
+    
+    // Reset success message after 5 seconds
+    setTimeout(() => setIsSubmitted(false), 5000);
   };
 
-  const closeToast = () => {
-    setToast({ ...toast, show: false });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      details: [
+        "Namon Katengeza (Chongoni)",
+        "Lilongwe/Dedza District",
+        "Malawi"
+      ]
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      details: [
+        "+265 XXX XXX XXX",
+        "+265 XXX XXX XXX",
+        "Office Hours: Mon-Fri 9AM-5PM"
+      ]
+    },
+    {
+      icon: Mail,
+      title: "Email Us",
+      details: [
+        "info@totalinvasion.org",
+        "pastor@totalinvasion.org",
+        "Response within 24-48 hours"
+      ]
+    },
+    {
+      icon: Clock,
+      title: "Service Times",
+      details: [
+        "Sunday Worship: 9:00 AM - 11:00 AM",
+        "Sunday School: 11:00 AM - 12:30 PM",
+        "Wednesday Bible Study: 6:00 PM"
+      ]
+    }
+  ];
 
   return (
-    <div className="w-full min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f8f9fa] to-[#f0f4f8]"></div>
-        <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-[#65a7b2]/5 animate-float-slow"></div>
-        <div className="absolute bottom-40 right-20 w-24 h-24 rounded-full bg-[#FFBE0B]/5 animate-float-medium"></div>
-        <div className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-[#292496]/5 animate-float-fast"></div>
-      </div>
-
-      <div className="max-w-6xl mx-auto py-16 md:py-24 px-4">
-        <div className="text-center mb-16 max-w-3xl mx-auto relative">
-          <div className="inline-block mb-6">
-            <span className="text-[#292496] text-sm font-semibold tracking-wider uppercase">
-              Connect With Us
+    <div className="pt-20">
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-block px-4 py-2 bg-primary-100 rounded-full text-primary-700 font-medium text-sm mb-4">
+              Get in Touch
             </span>
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              We`d Love to <br />
+              <span className="text-primary-600">Hear From You</span>
+            </h1>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Whether you have a question, prayer request, or just want to learn more, 
+              our team is here to help. Reach out today.
+            </p>
           </div>
-          <h1
-            className="text-4xl md:text-5xl font-normal tracking-wide"
-            style={{
-              fontWeight: 700,
-              color: "#292496",
-              letterSpacing: "0.02em",
-            }}
-          >
-            Let’s Build Together
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#65a7b2] to-[#FFBE0B] mx-auto rounded-full mt-6"></div>
-          <p className="text-gray-700 mt-8 leading-relaxed max-w-2xl mx-auto">
-            Every message you send plants a seed of change in a girl’s life in
-            Malawi.
-          </p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-[#292496]/10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-[#65a7b2]/10 rounded-bl-full"></div>
+      {/* Contact Content */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <div className="bg-accent-cream rounded-2xl p-8 shadow-sm">
+              <h3 className="font-serif text-2xl font-semibold text-gray-900 mb-6">
+                Send Us a Message
+              </h3>
+              
+              {isSubmitted && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3">
+                  <CheckCircle size={20} className="text-green-600 flex-shrink-0" />
+                  <p className="text-green-700 text-sm">
+                    Thank you! Your message has been received. We`ll get back to you soon.
+                  </p>
+                </div>
+              )}
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-lg border ${
+                        errors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-primary-500'
+                      } focus:outline-none focus:ring-2 focus:border-transparent transition-colors`}
+                      placeholder="Your name"
+                    />
+                    {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-lg border ${
+                        errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-primary-500'
+                      } focus:outline-none focus:ring-2 focus:border-transparent transition-colors`}
+                      placeholder="your@email.com"
+                    />
+                    {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+                  </div>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      placeholder="+265 XXX XXX XXX"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                      Subject
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      placeholder="How can we help?"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${
+                      errors.message ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-primary-500'
+                    } focus:outline-none focus:ring-2 focus:border-transparent transition-colors resize-none`}
+                    placeholder="Your message..."
+                  />
+                  {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+                </div>
+                
+                <button
+                  type="submit"
+                  className="btn-primary w-full inline-flex items-center justify-center"
+                >
+                  Send Message
+                  <Send size={18} className="ml-2" />
+                </button>
+              </form>
+            </div>
 
-            <h2 className="text-2xl font-bold text-[#292496] mb-6 relative z-10">
-              Send a Message
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-800 mb-2 font-medium"
-                >
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#65a7b2] focus:border-transparent outline-none transition"
-                  placeholder="e.g., Grace Ana."
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-800 mb-2 font-medium"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#65a7b2] focus:border-transparent outline-none transition"
-                  placeholder="you@example.com"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-gray-800 mb-2 font-medium"
-                >
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#65a7b2] focus:border-transparent outline-none transition"
-                  placeholder="Partnership Inquiry"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-gray-800 mb-2 font-medium"
-                >
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="5"
-                  className="w-full px-4 py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#65a7b2] focus:border-transparent outline-none transition"
-                  placeholder="Tell us how you'd like to support girls in Malawi..."
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full font-medium py-3.5 rounded-lg transition-all duration-300 shadow-md ${
-                  loading
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#292496] text-white hover:bg-opacity-90 hover:shadow-lg transform hover:-translate-y-0.5"
-                }`}
-              >
-                {loading ? "Sending..." : "Send Message"}
-              </button>
-            </form>
-          </div>
-
-          <div className="space-y-8">
+            {/* Contact Info */}
             <div className="space-y-8">
-              <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-[#65a7b2]/10">
-                <h2 className="text-2xl font-bold text-[#292496] mb-6">
-                  Get in Touch
-                </h2>
-                <div className="space-y-5">
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1 text-[#65a7b2] bg-[#65a7b2]/10 p-2 rounded-full">
-                      <MdOutlineEmail size={20} />
+              <div>
+                <h3 className="font-serif text-2xl font-semibold text-gray-900 mb-6">
+                  Contact Information
+                </h3>
+                
+                <div className="space-y-6">
+                  {contactInfo.map((info, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <info.icon size={24} className="text-primary-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900 mb-2">{info.title}</h4>
+                        <ul className="space-y-1">
+                          {info.details.map((detail, i) => (
+                            <li key={i} className="text-gray-600 text-sm">{detail}</li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-gray-800">Email Us</p>
-                      <a
-                        href="mailto:reachouttogirls@gmail.com"
-                        className="text-gray-700 hover:text-[#292496] transition-colors"
-                      >
-                        reachouttogirls@gmail.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1 text-[#292496] bg-[#292496]/10 p-2 rounded-full">
-                      <MdOutlineCall size={20} />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-800">Call Us</p>
-                      <a
-                        href="tel:+265996623227"
-                        className="text-gray-700 hover:text-[#292496] transition-colors"
-                      >
-                        +265 996 623 227
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1 text-[#FFBE0B] bg-[#FFBE0B]/10 p-2 rounded-full">
-                      <MdLocationOn size={20} />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-800">Our Location</p>
-                      <p className="text-gray-700">Area 49, Lilongwe, Malawi</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="rounded-2xl overflow-hidden shadow-xl border border-[#65a7b2]/20 h-64">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.472443431356!2d33.78750237505866!3d-13.96250328632086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1edc3b3e5e8f3d4d%3A0x5e5e5e5e5e5e5e5e!2sArea%2049%2C%20Lilongwe%2C%20Malawi!5e0!3m2!1sen!2smw!4v1710000000000!5m2!1sen!2smw"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Reach Out to Girls - Area 49, Lilongwe"
-                ></iframe>
+              {/* Map Placeholder */}
+              <div className="bg-gray-100 rounded-2xl h-64 flex items-center justify-center">
+                <div className="text-center">
+                  <MapPin size={48} className="mx-auto text-gray-400 mb-4" />
+                  <p className="text-gray-600 font-medium">Interactive Map</p>
+                  <p className="text-gray-500 text-sm">Namon Katengeza, Malawi</p>
+                </div>
               </div>
 
-              <div className="bg-gradient-to-r from-[#f0f9ff]/80 to-[#fffbeb]/80 p-6 rounded-2xl border border-[#FFBE0B]/30 backdrop-blur-sm">
-                <p className="text-gray-800 italic flex items-start gap-2">
-                  <span className="text-[#FFBE0B] text-xl">✨</span>
-                  We read every message and respond within{" "}
-                  <strong>24 hours</strong>.
-                </p>
+              {/* Social Links */}
+              <div>
+                <h4 className="font-medium text-gray-900 mb-4">Follow Us</h4>
+                <div className="flex space-x-4">
+                  {['Facebook', 'Twitter', 'Instagram', 'YouTube'].map((social) => (
+                    <a
+                      key={social}
+                      href="#"
+                      className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary-600 hover:text-white transition-colors"
+                      aria-label={`Follow us on ${social}`}
+                    >
+                      {social[0]}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="text-center mt-16">
-          <p className="text-gray-700 mb-6">
-            Ready to make a difference today?
-          </p>
-          <Link
-            to="/donate"
-            className="inline-block bg-gradient-to-r from-[#292496] to-[#65a7b2] text-white animate-bounce px-8 py-4 rounded-full font-medium hover:from-[#65a7b2] hover:to-[#292496] transition-all duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            Support a Girl`s Future
-          </Link>
-        </div>
-      </div>
-
-      {toast.show && (
-        <Toast message={toast.message} type={toast.type} onClose={closeToast} />
-      )}
-
-      <style jsx>{`
-        /* ... your float animations ... */
-        @keyframes float-slow {
-          /* ... */
-        }
-        /* ... */
-      `}</style>
+      </section>
     </div>
   );
 };
 
-export default ContactPage;
+export default Contact;

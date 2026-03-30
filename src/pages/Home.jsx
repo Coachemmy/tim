@@ -1,22 +1,20 @@
-import CTAHome from "../components/home/CTAHome";
-import Hero from "../components/home/Hero";
-import Partners from "../components/about/Partners";
-import SuccessStory from "../components/home/SuccessStory";
-import MainHero from "../components/home/MainHero";
-import BFooterHome from "../components/home/BFooterHome";
-import Vac from "../components/home/Vac";
+import Hero from '../components/Hero';
+import Services from '../components/Services';
+import AboutPreview from '../components/AboutPreview';
+import Events from '../components/Events';
+import Testimonials from '../components/Testimonials';
+import CTA from '../components/CTA';
 
 const Home = () => {
   return (
-    <div className="overflow-x-hidden overflow-y-hidden">
-      <CTAHome />
-      <Hero />     
-      <SuccessStory />
-      <MainHero />
-      <Vac/>
-      <BFooterHome />
-      <Partners />
-    </div>
+    <>
+      <Hero />
+      <Services />
+      <AboutPreview />
+      <Events />
+      <Testimonials />
+      <CTA />
+    </>
   );
 };
 

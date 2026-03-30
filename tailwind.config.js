@@ -3,20 +3,44 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors:{white: "#ffffff"},
-      textShadow: {
-        'default': '0 2px 4px rgba(0, 0, 0, 0.10)',
-        'md': '0 3px 6px rgba(0, 0, 0, 0.15)',
-        'lg': '0 10px 15px rgba(0, 0, 0, 0.20)',
-        'xl': '0 20px 25px rgba(0, 0, 0, 0.25)',
-        '2xl': '0 25px 50px rgba(0, 0, 0, 0.25)',
+     /** @type {import('tailwindcss').Config} */
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#fdf8f6',
+          100: '#f2e8e5',
+          200: '#eaddd7',
+          300: '#e0cec7',
+          400: '#d2bab0',
+          500: '#a0522d',
+          600: '#8b4513', 
+          700: '#6f3410',
+          800: '#5a2a0d',
+          900: '#4a220a',
+        },
+        secondary: {
+          50: '#f5f3f1',
+          100: '#e8e4df',
+          200: '#d4ccc4',
+          300: '#b8ada2',
+          400: '#9c8b7f',
+          500: '#8b7355',
+          600: '#6d5a45',
+        },
+        accent: {
+          gold: '#d4af37',
+          cream: '#faf6f1',
+        }
       },
-
-     
       fontFamily: {
-        Roboto: ["Roboto", "sans-serif"],     
-      }
+        serif: ['Playfair Display', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
     },
+  },
+  plugins: [],
+}
   },
   plugins: [
     // eslint-disable-next-line no-undef
